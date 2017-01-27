@@ -1,0 +1,33 @@
+<h1>listing questions</h1>
+<p> Total: <%= @questions.size %> </p>
+<p> <%= link_to 'New Question', new_question_path %></p>
+<table border="1">
+  <tr>
+    <th> Text</th>
+    <th> Choices</th>
+    <th colspan="3"> Opciones</th>
+  </tr>
+  <% @questions.each do |question| %>
+  <tr>
+    <td> <%= question.text %></td>
+    <td>
+      <ul>
+        <% question.choices.each do  |choice| %>
+            <li>
+              <%= choice.text %>
+              <% if choice.correct %> (Correct) <% end %>
+            </li>
+            <% end %>
+      </ul>
+    </td>
+    <td> <%= link_to 'Show', question %> </td>
+    <td> <%= link_to 'Edit', edit_question_path(question) %></td>
+    <td> <%= link_to 'Destroy', question, :confirm => 'Estas seguro?', :method => :delete %> </td>
+  </tr>
+      <% end %>
+</table>
+<% content_for(:title) do %>
+    All questions
+    <% end %>
+
+<p>Find me in app/views/questions/index.html.erb</p>
